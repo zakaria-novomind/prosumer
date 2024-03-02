@@ -28,6 +28,7 @@ pipeline {
 
       }
     }
+        }
 
     stage('Build') {
       steps {
@@ -52,12 +53,6 @@ pipeline {
     }
 
   }
-  environment {
-    DOCKER_IMAGE_NAME = 'your_image_name'
-    REMOTE_HOST = 'your_remote_host_ip'
-    REMOTE_USER = 'your_remote_username'
-    REMOTE_DIR = '/path/to/remote/directory'
-    DOCKERHUB_USERNAME = 'zakaria2novomind'
-    DOCKERHUB_TOKEN = 'dckr_pat_2sfHp-akKQK26vCzsgtyOPt6ZHc'
-  }
+
 }
+
