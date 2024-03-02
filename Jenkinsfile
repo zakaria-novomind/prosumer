@@ -20,10 +20,9 @@ pipeline {
                     // sh "echo 'NREL_PVWATT_KEY =  bRLrzOOFeHPpnRnqxxzskorqS298hf6JiND8iBFB' >> .env"
                     // sh "echo 'PREISE_API_KEY = 9d0fa79f58msh0f17d31a9e3cec0p178bc2jsn3619ac449c78' >> .env"
                     writeFile file: '.env', text: """
-                        DB_HOST=your_database_host
-                        DB_PORT=your_database_port
-                        DB_USER=your_database_username
-                        DB_PASS=your_database_password
+                        OPEN_WEATHER_API = d11ad90a4ab6e0b72bf65e5ce7970f92
+                        NREL_PVWATT_KEY =  bRLrzOOFeHPpnRnqxxzskorqS298hf6JiND8iBFB
+                        PREISE_API_KEY = 9d0fa79f58msh0f17d31a9e3cec0p178bc2jsn3619ac449c78
                     """
 
       }
