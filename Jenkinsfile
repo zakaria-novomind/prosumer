@@ -30,18 +30,18 @@ pipeline {
     }
         }
 
-    // stage('Build') {
-    //   steps {
-    //     script {
-    //       sh "npm install"
-    //       sh "npm run build"
-    //       sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_TOKEN}"
-    //       // Build Docker image
-    //       sh "docker build -t ${DOCKERHUB_USERNAME}/prosumer_app_jenkins:latest ."
-    //     }
+    stage('Build') {
+      steps {
+        script {
+          bat "npm install"
+          bat "npm run build"
+          bat "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_TOKEN}"
+          // Build Docker image
+          bat "docker build -t ${DOCKERHUB_USERNAME}/prosumer_app_jenkins:latest ."
+        }
 
-    //   }
-    // }
+      }
+    }
 
     // stage('Push to Registry') {
     //   steps {
