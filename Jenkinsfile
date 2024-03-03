@@ -16,14 +16,15 @@ pipeline {
             steps {
                 script {
                     // Create .env file with desired values
-                    // sh "echo 'OPEN_WEATHER_API = d11ad90a4ab6e0b72bf65e5ce7970f92' > .env"
-                    // sh "echo 'NREL_PVWATT_KEY =  bRLrzOOFeHPpnRnqxxzskorqS298hf6JiND8iBFB' >> .env"
-                    // sh "echo 'PREISE_API_KEY = 9d0fa79f58msh0f17d31a9e3cec0p178bc2jsn3619ac449c78' >> .env"
-                    writeFile file: '.env', text: """
-                        OPEN_WEATHER_API = d11ad90a4ab6e0b72bf65e5ce7970f92
-                        NREL_PVWATT_KEY =  bRLrzOOFeHPpnRnqxxzskorqS298hf6JiND8iBFB
-                        PREISE_API_KEY = 9d0fa79f58msh0f17d31a9e3cec0p178bc2jsn3619ac449c78
-                    """
+                    sh "touch .env"
+                    sh "echo 'OPEN_WEATHER_API = d11ad90a4ab6e0b72bf65e5ce7970f92' > .env"
+                    sh "echo 'NREL_PVWATT_KEY =  bRLrzOOFeHPpnRnqxxzskorqS298hf6JiND8iBFB' >> .env"
+                    sh "echo 'PREISE_API_KEY = 9d0fa79f58msh0f17d31a9e3cec0p178bc2jsn3619ac449c78' >> .env"
+                    // writeFile file: '.env', text: """
+                    //     OPEN_WEATHER_API = d11ad90a4ab6e0b72bf65e5ce7970f92
+                    //     NREL_PVWATT_KEY =  bRLrzOOFeHPpnRnqxxzskorqS298hf6JiND8iBFB
+                    //     PREISE_API_KEY = 9d0fa79f58msh0f17d31a9e3cec0p178bc2jsn3619ac449c78
+                    // """
 
       }
     }
