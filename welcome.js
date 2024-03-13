@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', async (req, res) =>
 {
 
-    res.send('Hello, World!');
+    res.send('Hello, World 2!');
 });
 
 
