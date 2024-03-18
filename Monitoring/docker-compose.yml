@@ -8,6 +8,8 @@ volumes:
 services:
   prometheus:
     image: prom/prometheus:v2.34.0
+   # extra_hosts:
+    #  -  "host.docker.internal:host-gateway"
     
     ports:
       - 9090:9090
@@ -20,10 +22,10 @@ services:
     ports:
       - 3000:3000
 
-  prosumerapp:
-    image: zakaria2novomind/prosumer_app:latest
+  # prosumerapp:
+  #   image: zakaria2novomind/prosumer_app:latest
 
-    ports:
-      - 5001:5001    
+  #   ports:
+  #     - 5001:5001    
 
 

@@ -25,6 +25,9 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 18  
+    
+    - name: Setup Node.js
+      run: node mailer.js        
         
     - name: Install dependencies
       run: npm install
