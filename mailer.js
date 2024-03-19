@@ -1,3 +1,8 @@
+// read.js
+const fs = require('fs');
+const readline = require('readline')
+
+
 // Import nodemailer module
 const nodemailer = require('nodemailer');
 
@@ -10,14 +15,42 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-// Email content
+// // Email content
+// let mailOptions = {
+//     from: 'zimmermannzacharias89@gmail.com', // Sender email address
+//     to: 'zakizermani@gmail.com', // List of receivers
+//     subject: 'new update of the prosumer app must be installed', // Subject line
+//     text: 'please pull the new version!', // Plain text body
+//  //   html: '<b>Hello world!</b>' // HTML body
+// };
+
+
+
+
+
+
+// // Send email
+// transporter.sendMail(mailOptions, (error, info) => {
+//     if (error) {
+//         return console.log(error);
+//     }
+//     console.log('Message sent: %s', info.messageId);
+// });
+
+
+const readStream = fs.createReadStream('daten/Clients-mails.txt', 'utf-8');
+let rl = readline.createInterface({ input: readStream });
+rl.on('line', (line) => {
+
+    // Email content
 let mailOptions = {
     from: 'zimmermannzacharias89@gmail.com', // Sender email address
-    to: 'zakizermani@gmail.com', // List of receivers
+    to: line, // List of receivers
     subject: 'new update of the prosumer app must be installed', // Subject line
     text: 'please pull the new version!', // Plain text body
  //   html: '<b>Hello world!</b>' // HTML body
 };
+
 
 // Send email
 transporter.sendMail(mailOptions, (error, info) => {
@@ -25,4 +58,21 @@ transporter.sendMail(mailOptions, (error, info) => {
         return console.log(error);
     }
     console.log('Message sent: %s', info.messageId);
+});
+    
+
+    
+});
+rl.on('close', () => {
+  
+    console.log('kunden wurden benachrichtigt');
+});
+
+readStream.on('error', (error) => console.log(error.message));
+readStream.on('data', (chunk) => {
+
+    // console.log(chunk)
+});
+readStream.on('end', () => {
+
 });
