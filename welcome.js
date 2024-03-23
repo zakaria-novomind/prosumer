@@ -7,11 +7,7 @@ const router = express.Router();
 router.get('/', async (req, res) =>
 {
 
-
-
-   res.send('Hello, World 3!');
-
-//res.sendFile(path.join(__dirname, 'index.html'));
+   res.sendFile(__dirname + '/html/index.html');
 });
 
 

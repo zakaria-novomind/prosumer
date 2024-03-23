@@ -7,6 +7,7 @@ const router3 = require('./PreisPrognoseApiRoutes')
 const router4 = require('./VerbrauchApiRoutes.js')
 const metricsRoute = require('./metricsAbruf.js')
 const welcome = require('./welcome.js')
+const update = require('./pullUpdate.js')
 const job = require('./job.js')
 
 const bodyparser = require('body-parser')
@@ -31,7 +32,8 @@ app.use("/api/strom", router2);
 app.use("/api/markt", router3);
 app.use("/api/verbrauch", router4);
 app.use("/api/metrics",metricsRoute);
-app.use("/api/welcome",welcome);
+app.use("/welcome",welcome);
+app.use("/update",update);
 
   // Starte den Job
 job();
