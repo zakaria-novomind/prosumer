@@ -44,7 +44,7 @@ rl.on('line', (line) => {
 
     let array = line.split(";");
     const dns = array[1]
-    const htmltext = '<p>please pull the new version! click this Link to Download the latest version: <a href="'+dns+'">'+dns+'</a></p>'
+    const htmltext = '<p>please pull the new version! click this Link to Download the latest version: <a href="'+dns+'">get-Update</a></p>'
 
 
     // Email content
