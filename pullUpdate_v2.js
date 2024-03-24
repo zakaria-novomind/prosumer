@@ -9,6 +9,7 @@ const privateKeyPath = 'priv-key.txt';
 // Define the Docker command you want to execute
 const dockerPullCommand = 'sudo docker-compose pull prosumerapp';
 const dockerInstallCommand = 'sudo docker-compose up -d prosumerapp';
+const command = 'sudo docker-compose pull prosumerapp \  sudo docker-compose up -d prosumerapp'
 const testcmd = 'sudo docker-compose -f nginx/docker-compose.yml down'
 const conn = new Client();
 
@@ -18,7 +19,7 @@ conn.on('ready', () => {
 
   // Execute commands after successful connection (optional)
   // You can replace this with your desired commands
-  conn.exec(testcmd, (err, stream) => {
+  conn.exec(command, (err, stream) => {
     if (err) {
       console.error(err);
       return;
