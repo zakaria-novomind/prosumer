@@ -1,1 +1,1 @@
-zermani@th-brandenburg.de;http://ec2-52-86-213-65.compute-1.amazonaws.com:5001/update/pull
+zermani@th-brandenburg.de;http://ec2-44-218-216-226.compute-1.amazonaws.com:5001/update/pull
