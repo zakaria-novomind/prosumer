@@ -27,9 +27,6 @@ router.get('/pull', (req, res) => {
     // Hier kannst du die gewünschten Aktionen ausführen
 
    pullUpdate ();
-   setTimeout(() => {
-    console.log("5 seconds have passed.");
-}, 10000);
    installUpdate();
     
     
@@ -68,7 +65,8 @@ function pullUpdate () {
       });
 }
 
-function installUpdate () {
+async function installUpdate () {
+    await sleep(10000);
     console.log('restart service...');
     connInstall.on('ready', () => {
         console.log('Connected to server to restart a service');
@@ -97,7 +95,9 @@ function installUpdate () {
       });
       
 }
-
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 
 
 module.exports = router;
