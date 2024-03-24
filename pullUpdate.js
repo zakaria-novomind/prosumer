@@ -23,10 +23,11 @@ router.get('/', async (req, res) =>
 });
 
 // Routen-Handler für den "Get Update" Button definieren
-router.get('/pull', (req, res) => {
+ router.get('/pull', async (req, res) => {
     // Hier kannst du die gewünschten Aktionen ausführen
 
    pullUpdate ();
+   await sleep(15000);
    installUpdate();
     
     
@@ -65,8 +66,7 @@ function pullUpdate () {
       });
 }
 
-async function installUpdate () {
-    await sleep(10000);
+ function installUpdate () {
     console.log('restart service...');
     connInstall.on('ready', () => {
         console.log('Connected to server to restart a service');
