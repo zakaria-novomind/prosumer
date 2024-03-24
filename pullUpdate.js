@@ -14,7 +14,7 @@ const privateKeyPath = 'priv-key.txt';
 
 const conn = new Client();
 
- const counter = 1;
+ let counter = 1;
 router.get('/', async (req, res) =>
 {
 
