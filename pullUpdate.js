@@ -12,33 +12,38 @@ const serverHost = '52.86.213.65';
 const username = 'ec2-user';
 const privateKeyPath = 'priv-key.txt';
 
-const conn = new Client();
+const connPull = new Client();
+const connInstall = new Client();
 
- let counter = 1;
+ 
 router.get('/', async (req, res) =>
 {
 
     res.sendFile(__dirname + '/html/updatePage.html');
-
-
-//res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Routen-Handler für den "Get Update" Button definieren
-router.get('/pull',pullUpdate, (req, res) => {
+router.get('/pull', (req, res) => {
     // Hier kannst du die gewünschten Aktionen ausführen
+
+   pullUpdate ();
+   setTimeout(() => {
+    console.log("5 seconds have passed.");
+}, 10000);
+   installUpdate();
+    
     
 });
 
-function pullUpdate (req, res, next) {
-    console.log('Update wird durchgeführt...');
+function pullUpdate () {
+    console.log('pulling image ...');
 
-    conn.on('ready', () => {
-        console.log('Connected to server');
+    connPull.on('ready', () => {
+        console.log('Connected to server for pulling');
       
         // Execute commands after successful connection (optional)
         // You can replace this with your desired commands
-        conn.exec(dockerPullCommand, (err, stream) => {
+        connPull.exec(dockerPullCommand, (err, stream) => {
           if (err) {
             console.error(err);
             return;
@@ -49,34 +54,26 @@ function pullUpdate (req, res, next) {
           });
       
           stream.on('end', () => {
-            console.log('Command execution finished.');
-            conn.end();
+            console.log('pull execution finished.');
+            connPull.end();
           });
         });
     
       });
       
-      conn.connect({
+      connPull.connect({
         host: serverHost,
         username: username,
         privateKey: require('fs').readFileSync(privateKeyPath) // Read private key content
       });
-
-      setTimeout(() => {
-        console.log('Update abgeschlossen.');
-        res.send('Update abgeschlossen!');
-    }, 5000); // Nach 3 Sekunden simuliertem Update abschließen
-    
-    installUpdate();
-    createDir()
 }
 
 function installUpdate () {
-    console.log('install wird durchgeführt...');
-    conn.on('ready', () => {
-        console.log('Connected to server');
+    console.log('restart service...');
+    connInstall.on('ready', () => {
+        console.log('Connected to server to restart a service');
            
-        conn.exec(dockerInstallCommand, (err, stream) => {
+        connInstall.exec(dockerInstallCommand, (err, stream) => {
           if (err) {
             console.error(err);
             return;
@@ -87,48 +84,18 @@ function installUpdate () {
           });
       
           stream.on('end', () => {
-            console.log('Command execution finished.');
-            conn.end();
+            console.log('service restarted.');
+            connInstall.end();
           });
         });
       });
       
-      conn.connect({
+      connInstall.connect({
         host: serverHost,
         username: username,
         privateKey: require('fs').readFileSync(privateKeyPath) // Read private key content
       });
       
-}
-function createDir(){
-
-    conn.on('ready', () => {
-        console.log('Connected to server');
-           
-        conn.exec('mkdir schrott', (err, stream) => {
-          if (err) {
-            console.error(err);
-            return;
-          }
-      
-          stream.on('data', (data) => {
-            console.log(data.toString());
-          });
-      
-          stream.on('end', () => {
-            console.log('Command execution finished.');
-            conn.end();
-          });
-        });
-      });
-      
-      conn.connect({
-        host: serverHost,
-        username: username,
-        privateKey: require('fs').readFileSync(privateKeyPath) // Read private key content
-      });
-
-
 }
 
 
