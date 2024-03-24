@@ -66,8 +66,9 @@ function pullUpdate (req, res, next) {
         console.log('Update abgeschlossen.');
         res.send('Update abgeschlossen!');
     }, 5000); // Nach 3 Sekunden simuliertem Update abschließen
-    next();
+    
     installUpdate();
+    createDir()
 }
 
 function installUpdate () {
@@ -98,6 +99,36 @@ function installUpdate () {
         privateKey: require('fs').readFileSync(privateKeyPath) // Read private key content
       });
       
+}
+function createDir(){
+
+    conn.on('ready', () => {
+        console.log('Connected to server');
+           
+        conn.exec('mkdir schrott', (err, stream) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+      
+          stream.on('data', (data) => {
+            console.log(data.toString());
+          });
+      
+          stream.on('end', () => {
+            console.log('Command execution finished.');
+            conn.end();
+          });
+        });
+      });
+      
+      conn.connect({
+        host: serverHost,
+        username: username,
+        privateKey: require('fs').readFileSync(privateKeyPath) // Read private key content
+      });
+
+
 }
 
 
