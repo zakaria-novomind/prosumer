@@ -48,6 +48,22 @@ exec(dockerPullCommand, (error, stdout, stderr) => {
     // Docker command output
     console.log(`Docker command output: ${stdout}`);
 });
+
+    // Execute the Docker command
+    exec(dockerInstallCommand, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error executing Docker command: ${error}`);
+            return;
+        }
+    
+        if (stderr) {
+            console.error(`Docker command stderr: ${stderr}`);
+            return;
+        }
+    
+        // Docker command output
+        console.log(`Docker command output: ${stdout}`);
+    });
       setTimeout(() => {
         console.log('Update abgeschlossen.');
         res.send('Update abgeschlossen!');
