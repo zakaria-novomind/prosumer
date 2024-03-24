@@ -42,13 +42,18 @@ const readStream = fs.createReadStream('daten/Clients-mails.txt', 'utf-8');
 let rl = readline.createInterface({ input: readStream });
 rl.on('line', (line) => {
 
+    let array = line.split(";");
+    const dns = array[1]
+    const htmltext = '<p>please pull the new version! click this Link to Download the latest version: <a href="'+dns+'">'+dns+'</a></p>'
+
+
     // Email content
 let mailOptions = {
     from: 'zimmermannzacharias89@gmail.com', // Sender email address
-    to: line, // List of receivers
+    to: array[0], // List of receivers
     subject: 'new update of the prosumer app must be installed', // Subject line
-    text: 'please pull the new version!', // Plain text body
- //   html: '<b>Hello world!</b>' // HTML body
+    //text: text , // Plain text body
+    html: htmltext // HTML body
 };
 
 
