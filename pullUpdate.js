@@ -28,101 +28,76 @@ router.get('/', async (req, res) =>
 router.get('/pull',pullUpdate, (req, res) => {
     // Hier kannst du die gewünschten Aktionen ausführen
     
-    
-    // Beispiel: Ein fiktives Update durchführen
-    // setTimeout(() => {
-    //     console.log('Update abgeschlossen.');
-    //     res.send('Update abgeschlossen!');
-    // }, 3000); // Nach 3 Sekunden simuliertem Update abschließen
 });
 
 function pullUpdate (req, res, next) {
     console.log('Update wird durchgeführt...');
 
-    // conn.connect({
-    //     host: serverHost,
-    //     username: username,
-    //     privateKey: require('fs').readFileSync(privateKeyPath) // Read private key content
-    //   });
-
-    //   conn.on('ready', () => {
-    //     console.log('Connected to server');
+    conn.on('ready', () => {
+        console.log('Connected to server');
       
-    //     // Execute commands after successful connection (optional)
-    //     // You can replace this with your desired commands
-    //     conn.exec(dockerPullCommand, (err, stream) => {
-    //       if (err) {
-    //         console.error(err);
-    //         return;
-    //       }
+        // Execute commands after successful connection (optional)
+        // You can replace this with your desired commands
+        conn.exec(dockerPullCommand, (err, stream) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
       
-    //       stream.on('data', (data) => {
-    //         console.log(data.toString());
-    //       });
+          stream.on('data', (data) => {
+            console.log(data.toString());
+          });
       
-    //       stream.on('end', () => {
-    //         console.log('Command execution finished.');
-    //         conn.end();
-    //       });
-    //     });
-      
-      
-    //     conn.exec(dockerInstallCommand, (err, stream) => {
-    //       if (err) {
-    //         console.error(err);
-    //         return;
-    //       }
-      
-    //       stream.on('data', (data) => {
-    //         console.log(data.toString());
-    //       });
-      
-    //       stream.on('end', () => {
-    //         console.log('Command execution finished.');
-    //         conn.end();
-    //       });
-    //     });
-    //   });
-      
-
-    counter ++;
-    let cmd = 'mkdir dir-'+ counter;
-    // Execute the Docker command
-exec(cmd, (error, stdout, stderr) => {
-    if (error) {
-        console.error(`Error executing Docker command: ${error}`);
-        return;
-    }
-
-    if (stderr) {
-        console.error(`Docker command stderr: ${stderr}`);
-        return;
-    }
-
-    // Docker command output
-    console.log(`Docker command output: ${stdout}`);
-});
-
-    // // Execute the Docker command
-    // exec(dockerInstallCommand, (error, stdout, stderr) => {
-    //     if (error) {
-    //         console.error(`Error executing Docker command: ${error}`);
-    //         return;
-    //     }
+          stream.on('end', () => {
+            console.log('Command execution finished.');
+            conn.end();
+          });
+        });
     
-    //     if (stderr) {
-    //         console.error(`Docker command stderr: ${stderr}`);
-    //         return;
-    //     }
-    
-    //     // Docker command output
-    //     console.log(`Docker command output: ${stdout}`);
-    // });
+      });
+      
+      conn.connect({
+        host: serverHost,
+        username: username,
+        privateKey: require('fs').readFileSync(privateKeyPath) // Read private key content
+      });
+
       setTimeout(() => {
         console.log('Update abgeschlossen.');
         res.send('Update abgeschlossen!');
-    }, 3000); // Nach 3 Sekunden simuliertem Update abschließen
+    }, 5000); // Nach 3 Sekunden simuliertem Update abschließen
     next();
+    installUpdate();
+}
+
+function installUpdate () {
+    console.log('install wird durchgeführt...');
+    conn.on('ready', () => {
+        console.log('Connected to server');
+           
+        conn.exec(dockerInstallCommand, (err, stream) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+      
+          stream.on('data', (data) => {
+            console.log(data.toString());
+          });
+      
+          stream.on('end', () => {
+            console.log('Command execution finished.');
+            conn.end();
+          });
+        });
+      });
+      
+      conn.connect({
+        host: serverHost,
+        username: username,
+        privateKey: require('fs').readFileSync(privateKeyPath) // Read private key content
+      });
+      
 }
 
 

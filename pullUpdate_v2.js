@@ -19,7 +19,24 @@ conn.on('ready', () => {
 
   // Execute commands after successful connection (optional)
   // You can replace this with your desired commands
-  conn.exec(command, (err, stream) => {
+  conn.exec(dockerPullCommand, (err, stream) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    stream.on('data', (data) => {
+      console.log(data.toString());
+    });
+
+    stream.on('end', () => {
+      console.log('Command execution finished.');
+      conn.end();
+    });
+  });
+  
+
+  conn.exec(dockerInstallCommand, (err, stream) => {
     if (err) {
       console.error(err);
       return;
