@@ -43,7 +43,7 @@ jobs:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
       with:
-        host: "44.218.216.226,44.205.51.138" # i can also put all host in one variable separated by comma
+        host: "63.34.200.68,34.246.144.25" # i can also put all host in one variable separated by comma
         port: 22    
         username: ec2-user
         key: ${{ secrets.PRIV_KEY }}
