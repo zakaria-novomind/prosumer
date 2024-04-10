@@ -48,7 +48,8 @@ jobs:
         username: ec2-user
         key: ${{ secrets.PRIV_KEY }}
         script: |
-            sudo docker-compose pull prosumerapp
-            sudo docker-compose up -d prosumerapp # restart the service
+             touch myfile.txt
+            #sudo docker-compose pull prosumerapp
+            #sudo docker-compose up -d prosumerapp # restart the service
             #sudo docker restart prosumer 
             #sudo docker-compose up -d
