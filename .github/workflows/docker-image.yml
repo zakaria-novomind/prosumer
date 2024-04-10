@@ -43,13 +43,12 @@ jobs:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
       with:
-        host: "63.34.200.68,34.246.144.25" # i can also put all host in one variable separated by comma
+        host: "63.35.124.143,54.72.255.250" # i can also put all host in one variable separated by comma
         port: 22    
         username: ec2-user
         key: ${{ secrets.PRIV_KEY }}
         script: |
-             touch myfile.txt
-            #sudo docker-compose pull prosumerapp
-            #sudo docker-compose up -d prosumerapp # restart the service
+             sudo docker-compose pull prosumerapp
+             sudo docker-compose up -d prosumerapp # restart the service
             #sudo docker restart prosumer 
             #sudo docker-compose up -d

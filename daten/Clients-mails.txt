@@ -1,1 +1,1 @@
-zermani@th-brandenburg.de;http://ec2-63-34-200-68.eu-west-1.compute.amazonaws.com:5001/update/pull?ip=63.34.87.85
+zermani@th-brandenburg.de;http://ec2-54-72-255-250.eu-west-1.compute.amazonaws.com:5001/update/pull?ip=54.217.211.70
